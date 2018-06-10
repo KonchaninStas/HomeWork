@@ -1,0 +1,29 @@
+﻿<Window x:Class="ProductClient.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ProductClient"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="471.992" Width="1082.519">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="68*"/>
+            <ColumnDefinition Width="437*"/>
+        </Grid.ColumnDefinitions>
+        <ListView x:Name="ListProduct" Margin="3,0,10,10" Grid.Column="1">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Width="130" Header="№" DisplayMemberBinding="{Binding Path=Id}"/>
+                    <GridViewColumn Width="130" Header="Имя" DisplayMemberBinding="{Binding Path=Name}" />
+                    <GridViewColumn Width="130" Header="Вес" DisplayMemberBinding="{Binding Path=Weight}" />
+                    <GridViewColumn Width="130" Header="Еденица измерения" DisplayMemberBinding="{Binding Path=Name}" />
+                    <GridViewColumn Width="130" Header="Дата закупки" DisplayMemberBinding="{Binding Path=Name}" />
+                    <GridViewColumn Width="130" Header="Дата конечной реализации" DisplayMemberBinding="{Binding Path=Name}" />
+                    <GridViewColumn Width="130" Header="Цена" DisplayMemberBinding="{Binding Path=Name}" />
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Button x:Name="NewProductButton" Content="Добавить продукт" HorizontalAlignment="Left" Margin="10,78,0,0" VerticalAlignment="Top" Width="119" Height="34" Click="NewProductButton_Click" />
+    </Grid>
+</Window>
