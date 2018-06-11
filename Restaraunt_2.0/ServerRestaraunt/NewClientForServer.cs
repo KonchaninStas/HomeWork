@@ -9,7 +9,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace ServerRestaraunt
-{
+{/// <summary>
+/// New connection to the server
+/// </summary>
     class NewClientForServer
     {
         public TcpClient client;
@@ -17,6 +19,9 @@ namespace ServerRestaraunt
         {
             client = Tcpclient;
         }
+        /// <summary>
+        ///  Exchange of messages with the client
+        /// </summary>
         public void Loading()
         {
             NetworkStream stream = null;
@@ -68,6 +73,12 @@ namespace ServerRestaraunt
                     client.Close();
             }
         }
+        /// <summary>
+        /// Selecting the element type
+        /// </summary>
+        /// <param name="message">Message for server</param>
+        /// <param name="json">Items</param>
+        /// <returns>Message for client</returns>
         string CommandMessage(string message, string[] json)
         {
             string outString = null;
@@ -102,6 +113,7 @@ namespace ServerRestaraunt
             }
             return outString;
         }
+        #region Message
         string DishCommand(string message, string[] json)
         {
             Dish data = null; ;
@@ -488,5 +500,6 @@ namespace ServerRestaraunt
             }
             return outMessage;
         }
+        #endregion
     }
 }

@@ -8,7 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace DateBaseLibraryEntiti.Repositiries.EntitiesRepositories
-{
+{/// <summary>
+/// Repositorises 
+/// </summary>
     public class DishsRepository : GenericRepositories<DishEnt>, IDishesRepository
     {
         public DishsRepository(RestorauntDbContex Contex)

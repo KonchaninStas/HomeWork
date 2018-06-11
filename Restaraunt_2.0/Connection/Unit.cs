@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace ConnectionToDateBase
 {
+    /// <summary>
+    /// Repositories for interaction with the database
+    /// </summary>
     public static class Unit
     {
         static RestorauntDbContex context;
@@ -18,7 +21,9 @@ namespace ConnectionToDateBase
         public static IProductsRepository ProductsRepository { get; private set; }
         public static IRecipesRepository RecipesRepository { get; private set; }
         public static IUnitsWeightRepository UnitsWeightRepository { get; private set; }
-
+        /// <summary>
+        ///  Repositories for interaction with the database
+        /// </summary>
         static Unit()
         {
             context = new RestorauntDbContex("RestarauntDB");

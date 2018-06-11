@@ -7,7 +7,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace DateBaseLibraryEntiti.Contex
-{
+{/// <summary>
+/// Create Database
+/// </summary>
     public class RestorauntDbContex : DbContext
     {
         public DbSet<OrderEnt> Orders { get; set; }

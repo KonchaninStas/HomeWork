@@ -8,6 +8,10 @@ using System.Threading.Tasks;
 
 namespace DateBaseLibraryEntiti.Repositiries.GenericRepositories
 {
+    /// <summary>
+    /// Generic methods for item
+    /// </summary>
+    /// <typeparam name="T">Type item</typeparam>
     public class GenericRepositories<T> : IDbRepositories<T> where T : class, IDbEntities
     {
         private RestorauntDbContex context;
