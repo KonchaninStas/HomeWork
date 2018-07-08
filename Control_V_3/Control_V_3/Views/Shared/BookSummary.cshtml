@@ -1,4 +1,5 @@
-﻿@using Control_V_3.Models.Entity
+﻿@using Control_V_3.Infrastructure
+@using Control_V_3.Models.Entity
 
 @model Book
 
@@ -7,9 +8,20 @@
 		<strong>@Model.Name</strong>
 		<span class="pull-right label label-primary">
 			@Model.Price.ToString() грн
-		</span> 
+		</span>
 	</h3>
-	<span class="lead">@Model.Description</span>
+	<form id="@Model.BookId" asp-action="AddToCart"
+		  asp-controller="Cart" method="post">
+		<input type="hidden" asp-for="BookId"/>
+		<input type="hidden" name="returnUrl"
+			   value="@ViewContext.HttpContext.Request.PathAndQuerry()"/>
+		<span class="lead">
+		@Model.Description
+			<button type="submit" class="btn btn-success btn-sm pull-right">
+				Add To Cart
+			</button>
+		</span>
+	</form>
 </div>
 
 

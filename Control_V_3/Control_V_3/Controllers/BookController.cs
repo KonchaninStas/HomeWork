@@ -28,7 +28,7 @@ namespace Control_V_3.Controllers
             return View (new BooksListViewModel
             {
                 Books = repository.Books
-                .Where(b => b.Category == null || b.Category.Name == category)
+                .Where(b =>category == null || b.Category == category)
                .OrderBy(b => b.BookId)
                .Skip((page - 1) * PageSize)
                .Take(PageSize),
@@ -36,7 +36,9 @@ namespace Control_V_3.Controllers
                 {
                     CurrentPage = page,
                     ItemsPerPage = PageSize,
-                    TotalItems = repository.Books.Count()
+                    TotalItems = category==null ?
+                    repository.Books.Count() :
+                    repository.Books.Where( b => b.Category==category).Count()
                 },
                 CurrentCategory=category
             });

@@ -9,5 +9,7 @@ namespace Control_V_3.Models.Repository
     public interface IBookRepository
     {
         IEnumerable<Book> Books { get; }
+        void SaveBook(Book book);
+        Book DeleteBook(int bookID);
     }
 }

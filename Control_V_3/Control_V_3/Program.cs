@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Control_V_3.Models.FakeBooks;
+using Control_V_3.Models.FakeRepository;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -15,8 +16,8 @@ namespace Control_V_3
     {
         public static void Main(string[] args)
         {
-            //FakeBooks.Start();
-
+            FakeBooks.Start();
+            
             BuildWebHost(args).Run();
         }
 

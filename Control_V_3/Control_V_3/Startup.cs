@@ -3,10 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Control_V_3.Models;
+using Control_V_3.Models.EFRepository;
 using Control_V_3.Models.FakeBooks;
+using Control_V_3.Models.FakeRepository;
+using Control_V_3.Models.Identity;
 using Control_V_3.Models.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -25,8 +30,18 @@ namespace Control_V_3
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<ApplicationContext>();
+            services.AddDbContext<AppIdentityDbContext>();
+            services.AddIdentity<IdentityUser, IdentityRole>()
+        .AddEntityFrameworkStores<AppIdentityDbContext>()
+        .AddDefaultTokenProviders();
+            //services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<AppIdentityDbContext>();
             services.AddTransient<IBookRepository, EFBooksRepository>();
+            services.AddScoped<Cart>(sp => SessionCart.GetCart(sp));
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddTransient<IOrderRepository, EFOrderRepository>();
             services.AddMvc();
+            services.AddMemoryCache();
+            services.AddSession();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -35,6 +50,9 @@ namespace Control_V_3
             app.UseDeveloperExceptionPage();
             app.UseStatusCodePages();
             app.UseStaticFiles();
+            app.UseSession();
+            app.UseIdentity();
+            app.UseAuthentication();
             app.UseMvc(routes => {
                 routes.MapRoute(
                     name: null,
@@ -59,25 +77,8 @@ namespace Control_V_3
                     name: null,
                     template: "{controller}/{action}/{id?}"
                     );
-               
-
-                //routes.MapRoute(
-                //    name: "pagination",
-                //    template: "Books/Page{page}",
-                //    defaults: new { Controller = "Book", action = "List" });
-                //routes.MapRoute(
-                //name: "default",
-                //template: "{controller=Book}/{action=List}/{id?}");
+                FakeIdentity.EnsurePopulated(app);
             });
-            //app.UseMvc(routes => {
-            //    routes.MapRoute(
-            //        name: "pagination",
-            //        template: "Books/Page{page}",
-            //        defaults: new { Controller = "Book", action = "List" });
-            //    routes.MapRoute(
-            //    name: "default",
-            //    template: "{controller=Book}/{action=List}/{id?}");
-            //});
         }
     }
 }

@@ -16,8 +16,9 @@ namespace Control_V_3.Components
         }
         public IViewComponentResult Invoke()
         {
+            ViewBag.SelectedCategory = RouteData?.Values["category"];
             return View(repository.Books
-                .Select(b => b.Category.Name)
+                .Select(b => b.Category)
                 .Distinct()
                 .OrderBy(b => b));
         }

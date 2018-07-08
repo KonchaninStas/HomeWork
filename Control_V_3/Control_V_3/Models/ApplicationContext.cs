@@ -10,8 +10,7 @@ namespace Control_V_3.Models
     public class ApplicationContext : DbContext
     {
         public DbSet<Book> Books { get; set; }
-        public DbSet<User> Users { get; set; }
-        public DbSet<Category> Categories { get; set; }
+        public DbSet<LoginModel> Users { get; set; }
         public DbSet<Order> Orders { get; set; }
         public ApplicationContext()
         {
@@ -19,7 +18,7 @@ namespace Control_V_3.Models
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=LENOVO-PC;Database=BooksBase;Trusted_Connection=True;");
+            optionsBuilder.UseSqlServer("Server=LENOVO-PC;Database=BooksShop;Trusted_Connection=True;");
         }
     }
 }
