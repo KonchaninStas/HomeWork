@@ -1,17 +1,14 @@
-﻿using Control_V_3.Models.Entity;
+﻿using DataBase.Entity;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace Control_V_3.Models
+namespace DataBase
 {
     public class ApplicationContext : DbContext
     {
-        public DbSet<Book> Books { get; set; }
-        public DbSet<LoginModel> Users { get; set; }
-        public DbSet<Order> Orders { get; set; }
+        public DbSet<BookEnt> Books { get; set; }
+        public DbSet<OrderEnt> Orders { get; set; }
+        public DbSet<CartLineEnt> Users { get; set; }
         public ApplicationContext()
         {
             Database.EnsureCreated();

@@ -1,27 +1,40 @@
-﻿using Control_V_3.Models.Entity;
+﻿using Control_V_3.Convert;
+using Control_V_3.Models.Entity;
 using Control_V_3.Models.Repository;
+using DataBase;
+using DataBase.Entity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Control_V_3.Models
+namespace Control_V_3.Models.EFRepository
 {
     public class EFBooksRepository : IBookRepository
     {
         ApplicationContext context = new ApplicationContext();
-        public IEnumerable<Book> Books => context.Books.ToArray();
+        ICollection<Book> BooksList()
+        {
+            List<Book> Book = new List<Book>();
+            foreach (var x in context.Books)
+            {
+                Book.Add(ConvertEntity.ConvertToBook(x));
+            }
+            return Book;
+        }
+        public IEnumerable<Book> Books => BooksList();
 
         public void SaveBook(Book book)
         {
-            if(book.BookId==0)
+            BookEnt bookEnt = ConvertEntity.ConvertToBookEnt(book);
+            if (book.BookId == 0)
             {
-                context.Books.Add(book);
+                context.Books.Add(bookEnt);
             }
             else
             {
-                Book dbEntry = context.Books.FirstOrDefault(b => b.BookId == book.BookId);
-                if(dbEntry!=null)
+                BookEnt dbEntry = context.Books.FirstOrDefault(b => b.BookEntId == book.BookId);
+                if (dbEntry != null)
                 {
                     dbEntry.Name = book.Name;
                     dbEntry.Description = book.Description;
@@ -35,13 +48,15 @@ namespace Control_V_3.Models
         }
         public Book DeleteBook(int bookID)
         {
-            Book dbEntry = context.Books.FirstOrDefault(b => b.BookId == bookID);
-            if(dbEntry!=null)
+            BookEnt dbEntry = context.Books.FirstOrDefault(b => b.BookEntId == bookID);
+            if (dbEntry != null)
             {
                 context.Books.Remove(dbEntry);
                 context.SaveChanges();
             }
-            return dbEntry;
+            Book book = ConvertEntity.ConvertToBook(dbEntry);
+            return book;
         }
     }
 }
+

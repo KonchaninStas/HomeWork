@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Control_V_3.Models;
+﻿using Control_V_3.Models;
 using Control_V_3.Models.EFRepository;
-using Control_V_3.Models.FakeBooks;
 using Control_V_3.Models.FakeRepository;
-using Control_V_3.Models.Identity;
 using Control_V_3.Models.Repository;
+using DataBase;
+using DataBaseIdentityLibrary;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -77,7 +73,7 @@ namespace Control_V_3
                     name: null,
                     template: "{controller}/{action}/{id?}"
                     );
-                FakeIdentity.EnsurePopulated(app);
+                //FakeIdentity.EnsurePopulated(app);
             });
         }
     }
